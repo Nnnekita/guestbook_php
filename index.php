@@ -1,23 +1,5 @@
 <?php
     require_once('config.php');
-    var_dump($_POST);
-    if ($_POST) {
-    $name = trim($_POST['name']);
-    $message = trim($_POST['message']);
-
-    if ($name && $message) {
-        
-        $stmt = $pdo->prepare("INSERT INTO messages (name, message) VALUES (?, ?)");
-        $stmt->execute([$name, $message]);
-
-        
-        header('Location: index.php');
-        exit;
-    } else {
-        $error = "Пожалуйста, заполните все поля.";
-    }
-    }
-
 $stmt = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC");
 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
@@ -29,10 +11,11 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 <body>
-<div class="box">
-    <form method="POST">
+<div class="box container col-6">
+    <form method="POST" action = "add.php">
         <input type="text" name="name" placeholder="Your name" required>
         <textarea name="message" rows="4" placeholder="Your message" required></textarea>
         <button type="submit">Send</button>
