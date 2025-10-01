@@ -1,4 +1,6 @@
-<?php var_dump($_POST);
+<?php 
+var_dump($_POST);
+require_once("config.php");
     if ($_POST) {
     $name = trim($_POST['name']);
     $message = trim($_POST['message']);
